@@ -1,0 +1,70 @@
+import { resolve } from 'node:path'
+
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+  compatibilityDate: '2024-11-01',
+  ssr: false,
+  devtools: { enabled: true },
+  app: {
+    head: {
+      title: 'Owen'
+    }
+    // pageTransition: {
+    //   name: 'page',
+    //   mode: 'out-in'
+    // }
+  },
+  modules: [
+    '@nuxt/content',
+    '@nuxt/fonts',
+    '@vueuse/nuxt',
+    '@nuxt/image',
+    '@nuxt/icon',
+    '@unocss/nuxt'
+  ],
+  css: ['@unocss/reset/tailwind.css', '~/assets/styles/global.scss'],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler'
+        }
+      }
+    }
+  },
+  fonts: {
+    defaults: {
+      weights: [100, 400, 900],
+      styles: ['normal', 'italic'],
+      subsets: ['latin', 'latin-ext']
+    }
+  },
+  content: {
+    markdown: {
+      toc: {
+        depth: 3
+      }
+    },
+    highlight: {
+      langs: [
+        'json',
+        'js',
+        'ts',
+        'html',
+        'css',
+        'vue',
+        'shell',
+        'jsx',
+        'md',
+        'tsx',
+        'yaml',
+        'scss'
+      ],
+      theme: {
+        default: 'catppuccin-latte',
+        dark: 'catppuccin-mocha'
+      }
+    }
+  }
+})
+
