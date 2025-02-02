@@ -28,13 +28,14 @@
 </template>
 
 <script setup lang="ts">
-import dayjs from 'dayjs'
 import type { ParsedContent, QueryBuilderParams } from '@nuxt/content'
+
+const dayjs = useDayjs()
 
 const processList = (list: ParsedContent[]) => {
   const ret: Map<string, ParsedContent[]> = new Map()
   list.forEach((post) => {
-    const year = dayjs(post.date).format('YYYY')
+    const year = dayjs(post.date, 'YYYY.MM.DD').format('YYYY')
     if (ret.has(year)) {
       ret.get(year)!.push(post)
     } else {

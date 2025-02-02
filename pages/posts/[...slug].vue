@@ -2,7 +2,7 @@
   <article class="prose prose-neutral dark:prose-invert">
     <ContentDoc v-slot="{ doc }">
       <h1>{{ doc.title }}</h1>
-      <span class="text-muted">{{ formatDate(doc.date) }}</span>
+      <span class="text-muted">{{ $dayjs(doc.date, 'YYYY.MM.DD').format('MMM.DD, YYYY') }}</span>
       <hr />
       <ContentRenderer :value="doc" />
 
@@ -24,11 +24,3 @@
     </div>
   </article>
 </template>
-
-<script setup lang="ts">
-import dayjs from 'dayjs'
-
-const formatDate = (date?: string) => {
-  return date ? dayjs(date).format('MMM.DD, YYYY') : ''
-}
-</script>

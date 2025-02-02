@@ -24,8 +24,12 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxt/image',
     '@nuxt/icon',
-    '@unocss/nuxt'
+    '@unocss/nuxt',
+    'dayjs-nuxt'
   ],
+  dayjs: {
+    plugins: ['customParseFormat']
+  },
   css: ['@unocss/reset/tailwind.css', '~/assets/styles/global.scss'],
   vite: {
     css: {

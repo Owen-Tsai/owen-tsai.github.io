@@ -6,21 +6,15 @@
     >
     <span
       class="text-muted text-sm group-hover:text-neutral-500 transition-colors ease-in-out duration-200"
-      >{{ formatDate(date) }}</span
+      >{{ $dayjs(date, 'YYYY.MM.DD').format('MMM.DD') }}</span
     >
   </NuxtLink>
 </template>
 
 <script setup lang="ts">
-import dayjs from 'dayjs'
-
 const { date, title, to } = defineProps<{
   to?: string
   title?: string
   date?: string
 }>()
-
-const formatDate = (date?: string) => {
-  return date ? dayjs(date).format('MMM.DD') : ''
-}
 </script>

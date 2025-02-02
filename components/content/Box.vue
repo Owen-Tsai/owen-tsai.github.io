@@ -28,7 +28,7 @@ const {
   icon = true,
   title
 } = defineProps<{
-  type: 'info' | 'success' | 'warning' | 'error'
+  type?: 'info' | 'success' | 'warning' | 'error'
   icon?: string | boolean
   title?: string
 }>()
