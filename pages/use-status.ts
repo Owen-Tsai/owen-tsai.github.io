@@ -6,11 +6,11 @@ const useStatus = () => {
       data: [
         {
           name: 'FusionX',
-          desc: 'Enterprise level LCDP based on Vue3 and SpringBoot.'
+          desc: 'Enterprise level LCDP.'
         },
         {
           name: 'Melody',
-          desc: 'A desktop graph app for creating mindmaps and graphs.'
+          desc: 'Desktop app for creating mindmaps and graphs.'
         }
       ]
     },
@@ -19,8 +19,8 @@ const useStatus = () => {
       icon: 'ri:book-3-fill',
       data: [
         {
-          name: '《雍正王朝》',
-          desc: 'Yongzheng Dynasty, the sequal of Kangxi Dynasty.'
+          name: '《乾隆王朝》',
+          desc: 'Qianlong Dynasty, the sequal of Kangxi Dynasty and Yongzheng Dynasty.'
         }
       ]
     },
@@ -33,8 +33,8 @@ const useStatus = () => {
           desc: 'A tactical strategy game based on WWII.'
         },
         {
-          name: 'Balatro',
-          desc: 'An example of how old mechanics can be innovated.'
+          name: 'Kingdom Come: Deliverance 2',
+          desc: 'History game based on Medieval.'
         }
       ]
     }
