@@ -45,12 +45,16 @@
 </template>
 
 <script setup lang="ts">
-import useTitle from './use-animated-title'
+import useAnimatedTitle from './use-animated-title'
 import useStatus from './use-status'
+
+useHead({
+  title: 'Owen | Web Dev'
+})
 
 const el = useTemplateRef('animRef')
 const cursor = useTemplateRef('cursorRef')
 
-useTitle(el, cursor)
+useAnimatedTitle(el, cursor)
 const status = useStatus()
 </script>

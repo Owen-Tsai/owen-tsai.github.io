@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: 'Owen'
+      title: 'Owen | Web Dev'
     }
     // pageTransition: {
     //   name: 'page',

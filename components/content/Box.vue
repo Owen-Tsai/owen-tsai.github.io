@@ -12,7 +12,7 @@
         <div v-if="icon && !title" class="flex-shrink-0 leading-normal">
           <Icon :name="iconToRender" size="1.3rem" class="icon align-middle" />
         </div>
-        <div class="text-secondary inner">
+        <div class="text-secondary inner max-w-full">
           <ContentSlot :use="($slots as any).default" />
         </div>
       </div>

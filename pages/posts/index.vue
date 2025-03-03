@@ -46,4 +46,8 @@ const processList = (list: ParsedContent[]) => {
 }
 
 const query: QueryBuilderParams = { sort: [{ date: -1 }] }
+
+useHead({
+  title: 'Blogs | Owen | Web Dev'
+})
 </script>
