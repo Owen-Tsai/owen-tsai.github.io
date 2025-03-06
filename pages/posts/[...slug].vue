@@ -6,16 +6,9 @@
       <hr />
       <ContentRenderer :value="doc" />
 
-      <div class="fixed left-8 top-32 bottom-0 group w-70 truncate hidden lg:block">
-        <Icon
-          name="ri:menu-2-fill"
-          size="1.2rem"
-          class="text-secondary opacity-60 group-hover:opacity-100 transition-opacity duration-600 ease-in-out"
-        />
-        <Toc
-          :links="doc.body?.toc?.links"
-          class="opacity-0 group-hover:opacity-100 transition-opacity duration-600 ease-in-out mt-2"
-        />
+      <div class="fixed left-8 top-32 bottom-0 w-60 truncate hidden lg:block">
+        <Icon name="ri:menu-2-fill" size="1.2rem" class="text-secondary opacity-60" />
+        <Toc :links="doc.body?.toc?.links" class="mt-2" />
       </div>
     </ContentDoc>
 
