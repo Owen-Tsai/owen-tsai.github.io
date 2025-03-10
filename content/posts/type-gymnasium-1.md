@@ -94,7 +94,8 @@ T2<'x' | 'y'> // 1 | 2
 其中，注意到 T1 和 T2 的结果不一致。这与`extends`的工作原理有关：
 
 - 如果`extends`用于比较两个简单类型，则单纯地判断前面的类型能否分配给后面的类型。
-- 如果`extends`前面是一个泛型，且传入的泛型是联合类型时，则依次判断该联合类型中所有子类型能否分配给后面的类型。如果可以则视为真。
+- 如果`extends`前面是一个[裸类型参数（Naked Type Parameter）](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#distributive-conditional-types)，且传入的泛型是联合类型时，则**触发分发机制**。此时依次判断该联合类型中所有子类型能否分配给后面的类型，然后将所有结果合并为一个**联合类型**返回。
+- 若要阻止分发机制，可以通过包裹简单的元组类型实现：`type T2<G> = [G] extends ['x'] ? 1 : 2`，此时`T2<'x' | 'y'>`的结果为 2。
 
 ### `Exclude`的实现
 
