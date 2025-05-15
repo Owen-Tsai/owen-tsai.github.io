@@ -9,8 +9,8 @@ const useStatus = () => {
           desc: 'Enterprise level LCDP.'
         },
         {
-          name: 'Melody',
-          desc: 'Desktop app for creating mindmaps and graphs.'
+          name: 'Tide UI',
+          desc: 'A Vue 3 component library.'
         }
       ]
     },
@@ -19,8 +19,8 @@ const useStatus = () => {
       icon: 'ri:book-3-fill',
       data: [
         {
-          name: '《乾隆王朝》',
-          desc: 'Qianlong Dynasty, the sequal of Kangxi Dynasty and Yongzheng Dynasty.'
+          name: '《The Thursday Murder Club》',
+          desc: '周四推理俱乐部'
         }
       ]
     },
@@ -34,7 +34,7 @@ const useStatus = () => {
         },
         {
           name: 'Kingdom Come: Deliverance 2',
-          desc: 'History game based on Medieval.'
+          desc: 'Just finished this masterpiece.'
         }
       ]
     }
