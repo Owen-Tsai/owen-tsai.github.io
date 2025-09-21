@@ -1,3 +1,5 @@
+@import 'tailwindcss';
+
 body {
   position: relative;
   @apply bg-neutral-950;
@@ -13,7 +15,6 @@ html {
   overflow-x: hidden;
 }
 
-// 原生滚动条，横向，用于代码段
 html ::-webkit-scrollbar {
   height: 8px;
   width: 8px;
@@ -24,7 +25,7 @@ html ::-webkit-scrollbar-track {
 }
 
 html ::-webkit-scrollbar-thumb {
-  background-color: rgba(#fff, 0.2) !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
   border-radius: 4px;
 }
 
@@ -33,7 +34,7 @@ html ::-webkit-scrollbar-thumb {
 }
 
 .prose :not(pre) > code {
-  @apply whitespace-break-spaces;
+  white-space: break-spaces;
 }
 
 :root {

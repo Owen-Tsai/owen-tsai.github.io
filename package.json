@@ -15,24 +15,22 @@
     "@nuxt/fonts": "0.11.4",
     "@nuxt/icon": "2.0.0",
     "@nuxt/image": "1.11.0",
+    "@tailwindcss/vite": "^4.1.13",
     "@vueuse/core": "^13.6.0",
     "@vueuse/nuxt": "^13.6.0",
     "better-sqlite3": "^12.2.0",
-    "custom-vue-scrollbar": "^0.0.8",
     "dayjs": "^1.11.13",
     "eslint": "^9.0.0",
     "gsap": "^3.13.0",
     "nuxt": "^4.0.3",
     "p5": "1",
+    "tailwindcss": "^4.1.13",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
   },
   "packageManager": "pnpm@9.12.3+sha1.4fb96925d434c491285182acf29803bb9aa2e6e5",
   "devDependencies": {
     "@types/p5": "^1.7.6",
-    "@unocss/nuxt": "^66.4.2",
-    "sass-embedded": "^1.90.0",
-    "typescript": "^5.9.2",
-    "unocss": "^66.4.2"
+    "typescript": "^5.9.2"
   }
 }
