@@ -1,0 +1,41 @@
+body {
+  position: relative;
+  @apply bg-neutral-950;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+// 原生滚动条，横向，用于代码段
+html ::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+html ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html ::-webkit-scrollbar-thumb {
+  background-color: rgba(#fff, 0.2) !important;
+  border-radius: 4px;
+}
+
+.prose pre.shiki {
+  background-color: #18191e;
+}
+
+.prose :not(pre) > code {
+  @apply whitespace-break-spaces;
+}
+
+:root {
+  --max-width-view: 1440px;
+}

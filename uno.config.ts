@@ -1,22 +1,15 @@
-import { defineConfig, transformerDirectives, presetTypography, presetUno } from 'unocss'
+import { defineConfig, transformerDirectives, presetTypography, presetWind4, presetAttributify } from 'unocss'
 
 export default defineConfig({
-  presets: [presetUno(), presetTypography()],
-  transformers: [transformerDirectives()],
+  presets: [
+    presetWind4(),
+    presetTypography(),
+    presetAttributify(),
+  ],
+  transformers: [
+    transformerDirectives()
+  ],
   shortcuts: {
-    'text-muted': 'text-neutral-400 dark:text-neutral-500',
-    'style-cd': 'text-muted font-mono',
-    'text-primary': 'text-neutral-800 dark:text-neutral-200',
-    'text-secondary': 'text-neutral-600 dark:text-neutral-400',
-    'text-tertiary': 'text-neutral-400 dark:text-neutral-500',
-    'text-quaternary': 'text-neutral-300 dark:text-neutral-700'
-  },
-  rules: [[/^font-slim/, () => ({ 'font-family': 'Roboto Condensed' })]],
-  theme: {
-    fontFamily: {
-      sans: '"Roboto", "Inter", sans-serif',
-      mono: '"Roboto Mono", monospace',
-      slim: '"Roboto Condensed", sans-serif'
-    }
+    'underline-link': `relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-1px after:bg-neutral-200 after:scale-0 after:origin-left hover:after:scale-100 after:transition-transform after:duration-300`
   }
 })
