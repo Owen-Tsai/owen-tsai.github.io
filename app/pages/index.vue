@@ -92,7 +92,7 @@ const sketch = (p: P5) => {
     }
 
     time += 0.01
-    if (p.millis() - lastTickTime > 2000 && isDistorted.value) {
+    if (p.millis() - lastTickTime > 2000 && isDistorted.value && isMobile.value) {
       lastTickTime = p.millis()
       textBox.restore()
     }
