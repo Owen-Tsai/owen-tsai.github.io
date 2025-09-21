@@ -39,30 +39,32 @@ const iconName = computed(() => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
+@reference 'tailwindcss';
+
 .box-info {
-  @apply bg-gradient-to-lt from-70% to-120% from-[#111a2c] to-[#15325b] rounded-lg border-[#15325b] border text-neutral-300 p-4;
+  @apply bg-gradient-to-tl from-[70%] to-[120%] from-[#111a2c] to-[#15325b] rounded-lg border-[#15325b] border text-neutral-300 p-4;
   .icon {
     @apply text-blue-500;
   }
 }
 
 .box-warning {
-  @apply bg-gradient-to-lt from-70% to-120% from-[#2b2111] to-[#594214] rounded-lg border-[#594214] border text-neutral-300 p-4;
+  @apply bg-gradient-to-tl from-[70%] to-[120%] from-[#2b2111] to-[#594214] rounded-lg border-[#594214] border text-neutral-300 p-4;
   .icon {
     @apply text-yellow-500;
   }
 }
 
 .box-danger {
-  @apply bg-gradient-to-lt from-70% to-120% from-[#2c1618] to-[#5b2526] rounded-lg border-[#5b2526] border text-neutral-300 p-4;
+  @apply bg-gradient-to-tl from-[70%] to-[120%] from-[#2c1618] to-[#5b2526] rounded-lg border-[#5b2526] border text-neutral-300 p-4;
   .icon {
     @apply text-red-500;
   }
 }
 
 .box-success {
-  @apply bg-gradient-to-lt from-70% to-120% from-[#162312] to-[#274916] rounded-lg border-[#274916] border text-neutral-300 p-4;
+  @apply bg-gradient-to-tl from-[70%] to-[120%] from-[#162312] to-[#274916] rounded-lg border-[#274916] border text-neutral-300 p-4;
   .icon {
     @apply text-green-500;
   }

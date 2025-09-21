@@ -31,7 +31,6 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/icon',
     '@nuxt/image',
-    '@unocss/nuxt',
     '@vueuse/nuxt',
   ],
 

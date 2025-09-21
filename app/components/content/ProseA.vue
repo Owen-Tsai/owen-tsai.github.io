@@ -1,7 +1,11 @@
 <template>
-  <NuxtLink :href="props.href" :target="isExternal ? '_blank' : props.target">
+  <NuxtLink
+    :href="props.href"
+    :target="isExternal ? '_blank' : props.target"
+    class="inline-flex items-center"
+  >
     <slot />
-    <Icon v-if="isExternal" name="ri:arrow-right-line" />
+    <Icon v-if="isExternal" name="ri:arrow-right-up-long-line" />
   </NuxtLink>
 </template>
 

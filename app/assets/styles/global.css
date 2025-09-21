@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
 body {
   position: relative;
@@ -39,4 +40,29 @@ html ::-webkit-scrollbar-thumb {
 
 :root {
   --max-width-view: 1440px;
+}
+
+.underline-link {
+  position: relative;
+}
+.underline-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-neutral-200);
+  scale: 0;
+  transform-origin: left;
+  transition: all 0.3s ease-in-out;
+}
+.underline-link:hover::after {
+  scale: 1;
+}
+.underline-link.active {
+  font-weight: bold;
+}
+.underline-link.active::after {
+  scale: 1;
 }

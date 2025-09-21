@@ -8,7 +8,7 @@
         <NuxtLink
           :to="nav.link"
           class="underline-link"
-          active-class="after:scale-100 text-neutral-200 font-bold"
+          :class="{ active: nav.link === '/blog' && route.path.includes('blog') }"
         >
           {{ nav.name }}
         </NuxtLink>
@@ -59,3 +59,4 @@ watch(
   },
 )
 </script>
+>

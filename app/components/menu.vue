@@ -1,7 +1,7 @@
 <template>
   <div ref="el" class="fixed top-0 left-0 right-0 bottom-0 z-98">
     <div
-      class="w-full h-full bg-neutral-200 text-neutral-950 relative px-10 py-12 pt-15vh flex flex-col gap-6 text-3xl"
+      class="w-full h-full bg-neutral-200 text-neutral-950 relative px-10 py-12 pt-[15vh] flex flex-col gap-6 text-3xl"
     >
       <NuxtLink class="underline-link" to="/">HOME</NuxtLink>
       <NuxtLink class="underline-link" to="/blog">BLOG</NuxtLink>

@@ -9,7 +9,7 @@
           </div>
         </div>
         <div class="md:col-start-2 md:col-end-5 md:pl-8 md:py-12">
-          <article class="prose prose-neutral prose-invert font-thin max-w-2xl">
+          <article class="prose prose-neutral prose-invert max-w-2xl">
             <h1 class="text-6xl font-thin leading-tight">{{ data?.title }}</h1>
             <div class="mt-6 text-neutral-500">{{ dayjs(data?.date).format('MMM DD, YYYY') }}</div>
             <ContentRenderer v-if="data" :value="data" class="mt-12" />
