@@ -22,7 +22,7 @@ const onClick = () => {
 }
 </script>
 
-<style lang="scss">
+<style>
 .fab-enter-active,
 .fab-leave-active {
   transition: all 0.2s ease-in-out;
