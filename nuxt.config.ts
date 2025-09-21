@@ -9,11 +9,10 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
-  ssr: false,
-
   nitro: {
     prerender: {
-      routes: ['/'],
+      crawlLinks: true,
+      routes: ['/', '/about', '/blog'],
     },
   },
 

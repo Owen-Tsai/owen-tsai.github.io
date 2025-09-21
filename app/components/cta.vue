@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { gsap } from '@/utils/gsap'
+import gsap from 'gsap'
 
 const { to, target = '' } = defineProps<{
   to: string

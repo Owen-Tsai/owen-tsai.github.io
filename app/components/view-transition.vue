@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { gsap } from '@/utils/gsap'
+import gsap from 'gsap'
 
 const { smallerOrEqual } = breakpoints
 const isMobile = computed(() => smallerOrEqual('sm').value)

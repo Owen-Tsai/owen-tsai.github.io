@@ -1,7 +1,7 @@
 <template>
-  <div ref="canvasRef">
-
-  </div>
+  <ClientOnly>
+    <div ref="canvasRef"></div>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">

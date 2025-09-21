@@ -32,6 +32,9 @@ type BoundingBox = {
 }
 
 const sketch = (p: P5) => {
+  if (typeof window === 'undefined') {
+    return
+  }
   let font: P5.Font
   let mouse: Mouse
   let time = 0

@@ -8,7 +8,7 @@ tags:
 ---
 
 ::box
-[Previously on the **Vue Analysis**](/posts/vue-analysis-1)
+[Previously on the **Vue Analysis**](/blog/vue-analysis-1)
 ::
 
 ---
