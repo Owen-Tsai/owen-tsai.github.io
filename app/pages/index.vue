@@ -1,6 +1,7 @@
 <template>
   <main class="w-full h-full bg-neutral-950 text-neutral-200 flex flex-col justify-end relative">
     <P5Canvas
+      v-if="isMounted"
       :sketch="sketch"
       class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -mt-10"
     />
@@ -12,13 +13,16 @@
 </template>
 
 <script setup lang="ts">
-import P5 from 'p5'
+import type P5 from 'p5'
+
+const { $p5 } = useNuxtApp()
 
 const { smallerOrEqual } = breakpoints
 const isMobile = computed(() => smallerOrEqual('sm').value)
 const borderPercentage = computed(() => (isMobile.value ? 0.1 : 0.25))
 
 const isDistorted = ref(false)
+const isMounted = useMounted()
 
 type BoundingBox = {
   x: number
@@ -32,9 +36,6 @@ type BoundingBox = {
 }
 
 const sketch = (p: P5) => {
-  if (typeof window === 'undefined') {
-    return
-  }
   let font: P5.Font
   let mouse: Mouse
   let time = 0
@@ -204,7 +205,7 @@ const sketch = (p: P5) => {
 
       const strength = p.min(p.width, p.height) * DISTORTION_STRENGTH
       // 根据角度生成方向向量
-      const randomVector = P5.Vector.fromAngle(angle).mult(strength)
+      const randomVector = $p5.Vector.fromAngle(angle).mult(strength)
 
       // 应用随机向量到目标位置
       this.targetPosition.set(
@@ -267,7 +268,7 @@ const sketch = (p: P5) => {
       for (let i = 1; i < points.length; i++) {
         const prevPoint = p.createVector(points[i - 1]!.x, points[i - 1]!.y)
         const currPoint = p.createVector(points[i]!.x, points[i]!.y)
-        const distance = P5.Vector.sub(currPoint, prevPoint).mag()
+        const distance = $p5.Vector.sub(currPoint, prevPoint).mag()
         // 距离过大则表示应当开启一个新的路径（字符中断开的部分）
         if (distance > 5) {
           paths.push(new Path(currentPath))
