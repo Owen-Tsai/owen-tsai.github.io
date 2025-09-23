@@ -1,7 +1,6 @@
 <template>
-  <Teleport to="body">
+  <Teleport v-if="loading && appState.isInitialLoad" to="body">
     <div
-      v-if="loading"
       class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-102 flex-col gap-2 pb-10"
     >
       <div>LOADING</div>
@@ -18,6 +17,8 @@ const percentage = ref(0)
 const loading = defineModel<boolean>('loading')
 let intervalId: NodeJS.Timeout | null = null
 
+const appState = useAppStates()
+
 const inc = () => {
   if (percentage.value >= 100) {
     return
@@ -31,6 +32,7 @@ const inc = () => {
 
 const done = () => {
   percentage.value = 100
+  appState.value.isInitialLoad = false
   if (intervalId) {
     clearInterval(intervalId)
     intervalId = null
@@ -47,6 +49,9 @@ watch(
 )
 
 onMounted(() => {
+  if (!appState.value.isInitialLoad) {
+    return
+  }
   intervalId = setInterval(() => {
     inc()
   }, 500)
