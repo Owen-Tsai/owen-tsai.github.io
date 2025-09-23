@@ -8,7 +8,8 @@
     <div class="absolute left-1/2 bottom-20 -translate-x-1/2">
       <Cta to="/resume.pdf" target="_blank">Get My Resume</Cta>
     </div>
-    <ViewTransition />
+    <ViewTransition :loading="loading" />
+    <Loading :loading="loading" />
   </main>
 </template>
 
@@ -23,6 +24,8 @@ const borderPercentage = computed(() => (isMobile.value ? 0.1 : 0.25))
 
 const isDistorted = ref(false)
 const isMounted = useMounted()
+
+const loading = ref(true)
 
 type BoundingBox = {
   x: number
@@ -76,6 +79,9 @@ const sketch = (p: P5) => {
   }
 
   p.draw = () => {
+    if (loading.value) {
+      loading.value = false
+    }
     p.clear()
     mouse.update()
     textBox.draw()

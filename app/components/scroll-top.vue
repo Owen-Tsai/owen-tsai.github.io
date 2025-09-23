@@ -2,7 +2,7 @@
   <Transition name="fab">
     <button
       v-show="visible"
-      class="border border-neutral-300/40 bg-neutral-800/10 backdrop-blur-2px flex items-center justify-center rounded-full p-2"
+      class="border border-neutral-300/40 bg-neutral-800/10 backdrop-blur-2px flex items-center justify-center rounded-full p-2 cursor-pointer hover:bg-neutral-800/80"
       @click="onClick"
     >
       <Icon name="ri:arrow-up-line" size="1.6rem" />

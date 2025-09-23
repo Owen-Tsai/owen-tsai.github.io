@@ -20,12 +20,10 @@ const els = useTemplateRef('els')
 
 const duration = 0.8
 
-// page is mounted with this component:
-onMounted(() => {
+const loading = defineModel<boolean>('loading', { default: undefined })
+
+const playAnimation = () => {
   if (!isMobile.value) {
-    gsap.set(els.value, {
-      y: 0,
-    })
     gsap.to(els.value, {
       y: '100%',
       duration,
@@ -38,9 +36,6 @@ onMounted(() => {
       },
     })
   } else {
-    gsap.set(els.value, {
-      x: 0,
-    })
     gsap.to(els.value, {
       x: '100%',
       duration,
@@ -52,6 +47,29 @@ onMounted(() => {
         })
       },
     })
+  }
+}
+
+// page is mounted with this component:
+onMounted(() => {
+  if (!isMobile.value) {
+    gsap.set(els.value, {
+      y: 0,
+    })
+  } else {
+    gsap.set(els.value, {
+      x: 0,
+    })
+  }
+
+  if (typeof loading.value === 'undefined') {
+    playAnimation()
+  }
+})
+
+watch(loading, (newVal, oldVal) => {
+  if (oldVal === true && newVal === false) {
+    playAnimation()
   }
 })
 
@@ -70,10 +88,12 @@ onBeforeRouteLeave((to, from, next) => {
       stagger: 0.1,
       onComplete() {
         next()
+        gsap.killTweensOf(els.value)
       },
     })
   } else {
     next()
+    gsap.killTweensOf(els.value)
   }
 })
 </script>

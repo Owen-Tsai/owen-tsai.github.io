@@ -1,5 +1,5 @@
 <template>
-  <header class="flex items-center justify-between px-8 py-2 mix-blend-difference z-999">
+  <header class="flex items-center justify-between px-8 py-2 mix-blend-difference z-99">
     <NuxtLink to="/">
       <Logo class="h-16 w-16" />
     </NuxtLink>
