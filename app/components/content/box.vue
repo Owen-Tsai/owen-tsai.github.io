@@ -25,7 +25,7 @@ const iconName = computed(() => {
 </script>
 
 <template>
-  <div :class="[`box-${theme}`, title ? 'items-start' : 'items-center']" class="flex gap-4">
+  <div :class="[`box-${theme}`, title ? 'items-start' : 'items-center']" class="flex gap-4 box">
     <Icon
       :name="iconName"
       :size="20"

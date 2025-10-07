@@ -1,5 +1,5 @@
 <template>
-  <div ref="canvasRef"></div>
+  <div ref="canvasEl"></div>
 </template>
 
 <script setup lang="ts">
@@ -7,37 +7,25 @@ import type P5 from 'p5'
 
 type Sketch = (p5: P5) => void
 
-const { $p5 } = useNuxtApp()
-
 const { sketch } = defineProps<{
   sketch: Sketch
 }>()
 
-const canvasRef = ref<HTMLDivElement>()
+const canvasEl = useTemplateRef('canvasEl')
+const { $p5 } = useNuxtApp()
 
-let p5Instance: any | null = null
-
-// instance mode
-// onMounted(async () => {
-//   const P5 = await import('p5')
-//   if (canvasRef.value) {
-//     p5Instance = new P5.default(sketch, canvasRef.value)
-//   }
-// })
+let p5Instance: P5 | null = null
 
 onMounted(() => {
-  console.log($p5)
-  if (canvasRef.value) {
-    p5Instance = new $p5(sketch, canvasRef.value)
+  if (canvasEl.value) {
+    p5Instance = new $p5(sketch, canvasEl.value)
   }
 })
 
 onBeforeUnmount(() => {
-  disposeP5()
+  if (p5Instance) {
+    p5Instance.remove()
+    p5Instance = null
+  }
 })
-
-const disposeP5 = () => {
-  p5Instance?.remove()
-  p5Instance = null
-}
 </script>

@@ -1,62 +1,24 @@
 <template>
-  <header class="flex items-center justify-between px-8 py-2 mix-blend-difference z-99">
-    <NuxtLink to="/">
-      <Logo class="h-16 w-16" />
-    </NuxtLink>
-    <div v-if="!isMobile" class="flex items-center gap-20">
-      <div v-for="nav in navs" :key="nav.name" class="relative group">
-        <NuxtLink
-          :to="nav.link"
-          class="underline-link"
-          :class="{ active: nav.link === '/blog' && route.path.includes('blog') }"
-        >
-          {{ nav.name }}
-        </NuxtLink>
-      </div>
+  <header class="flex items-center justify-center mix-blend-difference">
+    <div
+      class="px-(--view-padding) pt-(--view-padding) w-full mx-auto flex items-center justify-between"
+    >
+      <Logo />
+      <ClientOnly>
+        <nav v-if="!isMobile" class="flex items-center gap-8 font-[montserrat] font-medium">
+          <NavLink to="/" label="Home" class="indicator-dot" />
+          <NavLink to="/blog" label="Blog" class="indicator-dot" :class="{ active: isActive }" />
+          <NavLink to="/about" label="About" class="indicator-dot" />
+          <NavLink to="https://github.com/Owen-Tsai" label="Github" />
+        </nav>
+        <HamMenu v-else />
+      </ClientOnly>
     </div>
-    <div v-else @click="toggle()">
-      <Icon :name="visible ? 'ri-close-line' : 'ri-menu-line'" size="24px" />
-    </div>
-
-    <Teleport to="body">
-      <Menu ref="menu" />
-    </Teleport>
   </header>
 </template>
 
 <script setup lang="ts">
-const { smallerOrEqual } = breakpoints
-const isMobile = computed(() => smallerOrEqual('sm').value)
+const { path } = toRefs(useRoute())
 
-const menu = useTemplateRef('menu')
-
-const visible = ref(false)
-const route = useRoute()
-
-const toggle = () => {
-  visible.value = !visible.value
-  if (visible.value) {
-    menu.value?.open()
-  } else {
-    menu.value?.close()
-  }
-}
-
-const navs = [
-  { name: 'HOME', link: '/' },
-  { name: 'BLOG', link: '/blog' },
-  { name: 'ABOUT', link: '/about' },
-  { name: 'GITHUB', link: 'https://github.com/Owen-Tsai' },
-]
-
-watch(
-  () => route.path,
-  (to, from) => {
-    if (to !== from) {
-      visible.value = false
-      menu.value?.close()
-    }
-  },
-)
+const isActive = computed(() => path.value.includes('/blog/'))
 </script>
->

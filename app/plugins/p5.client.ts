@@ -1,5 +1,5 @@
-import P5 from 'p5'
+import p5 from 'p5'
 
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.provide('p5', P5)
+  nuxtApp.provide('p5', p5)
 })

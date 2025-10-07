@@ -9,9 +9,9 @@ tags:
 
 ## 从 Headless UI 开始...
 
-2022 年，我被指派主导开发一款基于 electron 的桌面应用程序。正是在为项目选择 UI 组件库时，顺着 TailwindCSS，我第一次接触到 [Headless UI](https://headlessui.com/)。
+在前端开发的演进历程中，UI 组件库始终是加速开发进程的关键利器。在 2022 年，我被指派负责开发一款基于 electron 的桌面应用程序。正是在为项目选择 UI 组件库时，顺着 TailwindCSS，我第一次接触到 [Headless UI](https://headlessui.com/)。
 
-彼时经历了 Element UI 的审美疲劳和客制化难题，我一眼就认定 Headless UI 是我理想中的技术方案。配合 Tailwind 进行了一段时间的开发之后——虽然由于组件数量偏少和开发周期有限导致我不得不再次引入 Element UI，但 Headless UI 的设计理念让我认为这是未来开发和维护组件库更好的方案。
+回溯过往，从经典的 Bootstrap、LayUI，到流行的 Ant Design、Element Plus，传统组件库凭借 “逻辑与样式一体化” 的封装策略，助力开发者高效构建规范化界面。然而，当业务场景日益多元，面临品牌个性化定制、多端无缝适配、无障碍设计合规等复杂需求时，传统组件库逻辑与样式强耦合的架构设计弊端渐显。而 headless 组件库以 **“行为与 UI 彻底分离”** 的创新架构理念，为攻克这些行业痛点提供了更具前瞻性的解决方案。
 
 ## 组件是如何构成的
 
@@ -79,7 +79,7 @@ function App() {
 
 ## Headless？
 
-说来惭愧，第一次听说“headless”的概念是读大一在玩 [Arma3（武装突袭 3）](https://community.bistudio.com/wiki/Arma_3:_Headless_Client)的时候。在创建公开游戏时，有”无头客户端“的概念。
+headless 组件库的核心定义可概括为：**只封装组件的 “行为逻辑”（如交互状态、事件处理、无障碍适配），不提供任何预设样式（即 “无 UI 外壳”），将视觉控制权完全交还给开发者**。
 
 在 UI 组件库的 scope 内，所谓的 headless 其实是指剥离了**样式**之后的**行为**。也就是说，headless 组件库是指具有基本的行为，但没有套用任何样式、不以还原某个设计系统或遵循固定的设计标准为目的的“行为库”。其实，Ant Design 也建立在这样一个行为库（[react-component](https://react-component.github.io/badgeboard/)）上。
 
@@ -91,9 +91,15 @@ Headless 组件库具有以下特点：
 - 不强制任何样式规范，甚至不进行 reset/normalize；
 - 暴露完整控制权。
 
-一个 Headless 组件通常包含若干个子组件，每一个构成组件的原子都可以进行定制，甚至根据实际情况更换和重写，因此开发者可以保持对组件的完整控制权。
+一个典型的 headless 组件往往由若干个原子组件构成，使开发者可以最大限度地定制组件的视觉效果。例如，一个`Dropdown`组件可能包含`DropdownRoot`、`DropdownTrigger`、`DropdownMenu`、`DropdownGroup`、`DropdownItem`、`DropdownSubMenu`等一系列原子。它们都具有完整的逻辑——交互、无障碍性、隐藏或显示的能力等等。开发者可以选择需要的原子组件 _（当然有些是必须的）_ 来拼装 UI。
 
-其次，Headless 组件允许开发者自行使用任何 CSS 技术，无论是使用 CSS Modules 还是 TailwindCSS，无论是使用 Sass 还是 Less，都可以对组件添加样式。
+## Headless 组件库的核心优势
+
+传统组件库的痛点本质是逻辑与 UI 强绑定导致的灵活性缺失。而 headless 组件库通过架构解耦实现了突破。
+
+传统组件库的样式与逻辑深度耦合，开发者若需修改视觉（例如更换品牌色），往往需要覆盖样式，破坏 CSS 优先级原则，使用`:global`来穿透组件的作用域等等。对于一些组件库，需要在其提供的在线文档或主题定制器中调整样式，将生成的 CSS 与项目中已有的进行合并才能达到目的。
+
+而 headless 组件库通过 “行为抽象层” 完全剥离 UI，开发者无需对抗预设样式，只需聚焦逻辑复用与视觉实现。除此之外，由于 headless 组件库不包含任何样式，自然也不依赖任何样式预处理器或框架，无论团队使用何种 CSS 解决方案（Sass、Less 或 TailwindCSS 等），都可以轻松地与 headless 组件库集成。
 
 ## 流行的 Headless 组件库
 

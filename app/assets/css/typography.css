@@ -1,0 +1,15 @@
+.prose :not(pre) > code {
+  white-space: break-spaces;
+}
+
+.box {
+  ul, ol {
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
+}
+
+.prose img {
+  max-width: 100%;
+  margin: auto;
+}

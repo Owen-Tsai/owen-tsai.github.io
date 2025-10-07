@@ -16,22 +16,15 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['~/assets/styles/global.css'],
+  css: ['~/assets/css/index.css'],
 
   app: {
     head: {
-      title: 'Owen',
+      title: 'Owen | Web Dev',
     },
   },
 
-  modules: [
-    '@nuxt/content',
-    '@nuxt/eslint',
-    '@nuxt/fonts',
-    '@nuxt/icon',
-    '@nuxt/image',
-    '@vueuse/nuxt',
-  ],
+  modules: ['@nuxt/content', '@nuxt/eslint', '@nuxt/icon', '@nuxt/image', '@vueuse/nuxt'],
 
   content: {
     build: {

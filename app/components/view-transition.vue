@@ -1,99 +1,90 @@
 <template>
   <Teleport to="body">
     <div
-      ref="mask"
-      class="fixed top-0 left-0 right-0 bottom-0 z-101 grid grid-rows-5 md:grid-cols-5 md:grid-rows-1"
+      class="fixed h-screen w-full overflow-hidden inset-0"
+      :class="isTransitioning ? 'z-102' : '-z-1'"
     >
-      <div v-for="i in 5" ref="els" :key="i" class="w-full h-full bg-neutral-200"></div>
+      <div ref="container" class="absolute h-full w-full flex flex-col items-center justify-center">
+        <img
+          ref="topImg"
+          :src="top"
+          class="inline-block w-full object-cover scale-y-0 origin-bottom transform-3d"
+          loading="eager"
+        />
+        <div class="w-full h-screen bg-[#1c1c1c] flex-none"></div>
+        <img
+          ref="bottomImg"
+          :src="bottom"
+          class="inline-block w-full object-cover origin-top scale-y-0 transform-3d"
+          loading="eager"
+        />
+      </div>
     </div>
   </Teleport>
 </template>
 
 <script setup lang="ts">
-import gsap from 'gsap'
+import top from '~/assets/img/trans-top.avif'
+import bottom from '~/assets/img/trans-bottom.avif'
 
-const { smallerOrEqual } = breakpoints
-const isMobile = computed(() => smallerOrEqual('sm').value)
+const topImg = useTemplateRef('topImg')
+const bottomImg = useTemplateRef('bottomImg')
+const container = useTemplateRef('container')
+const { $gsap } = useNuxtApp()
 
-const maskEl = useTemplateRef('mask')
-const els = useTemplateRef('els')
+const isTransitioning = ref(true)
 
-const duration = 0.8
+const TRANSITION_DURATION = 0.64
 
-const loading = defineModel<boolean>('loading', { default: undefined })
-
-const playAnimation = () => {
-  if (!isMobile.value) {
-    gsap.to(els.value, {
-      y: '100%',
-      duration,
-      ease: 'power2.inOut',
-      stagger: 0.1,
-      onComplete() {
-        gsap.set(maskEl.value, {
-          zIndex: -999,
-        })
-      },
-    })
-  } else {
-    gsap.to(els.value, {
-      x: '100%',
-      duration,
-      ease: 'power2.inOut',
-      stagger: 0.1,
-      onComplete() {
-        gsap.set(maskEl.value, {
-          zIndex: -999,
-        })
-      },
-    })
-  }
-}
-
-// page is mounted with this component:
 onMounted(() => {
-  if (!isMobile.value) {
-    gsap.set(els.value, {
-      y: 0,
-    })
-  } else {
-    gsap.set(els.value, {
-      x: 0,
-    })
-  }
-
-  if (typeof loading.value === 'undefined') {
-    playAnimation()
-  }
-})
-
-watch(loading, (newVal, oldVal) => {
-  if (oldVal === true && newVal === false) {
-    playAnimation()
-  }
+  // 展示页面
+  $gsap.set(container.value, {
+    y: 0,
+  })
+  $gsap.to(container.value, {
+    y: '100%',
+    duration: TRANSITION_DURATION,
+    ease: 'power1.inOut',
+  })
+  $gsap.fromTo(
+    topImg.value,
+    {
+      scaleY: 1,
+    },
+    {
+      scaleY: 0,
+      duration: TRANSITION_DURATION,
+      ease: 'power1.inOut',
+      onComplete: () => {
+        isTransitioning.value = false
+      },
+    }
+  )
 })
 
 onBeforeRouteLeave((to, from, next) => {
-  if (!isMobile.value) {
-    gsap.set(maskEl.value, {
-      zIndex: 999,
-    })
-    gsap.set(els.value, {
-      y: '-100%',
-    })
-    gsap.to(els.value, {
-      y: 0,
-      duration,
-      ease: 'power2.inOut',
-      stagger: 0.1,
-      onComplete() {
+  isTransitioning.value = true
+  $gsap.set(container.value, {
+    y: '-100%',
+  })
+  $gsap.to(container.value, {
+    y: 0,
+    duration: TRANSITION_DURATION,
+    ease: 'power1.inOut',
+  })
+  $gsap.fromTo(
+    bottomImg.value,
+    {
+      scaleY: 0,
+    },
+    {
+      scaleY: 1,
+      duration: TRANSITION_DURATION,
+      ease: 'power1.inOut',
+      onComplete: () => {
         next()
-        gsap.killTweensOf(els.value)
       },
-    })
-  } else {
-    next()
-    gsap.killTweensOf(els.value)
-  }
+    }
+  )
 })
 </script>

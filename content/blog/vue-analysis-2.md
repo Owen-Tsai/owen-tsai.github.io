@@ -8,12 +8,14 @@ tags:
 ---
 
 ::box
-[Previously on the **Vue Analysis**](/blog/vue-analysis-1)
+[Previously on the&nbsp;**Vue Analysis**](/blog/vue-analysis-1)
 ::
 
 ---
 
 ## 响应性的实现方式
+
+数据的响应特性是指在数据发生变化时，可以自动更新依赖于该数据的其他部分。仅从字面意思上进行判断，我们不难得出想要数据具备响应特性，则需要在写入数据时执行更新它的 dependants 的逻辑。这需要拦截对数据的写入操作。
 
 即便没有专门了解过 Vue 的设计原理，或多或少也都听说过 Vue 响应性的实现方式。在 Vue 2.x 时代，通过`Object.defineProperty`实现；在 Vue 3 时代，通过 Proxy 实现。
 
@@ -90,7 +92,7 @@ proxyObj.key = 100
 
 其次，在现实情况中，与一个响应性数据关联的副作用可能有多个。例如，在一个进制换算的应用中，用户输入的十进制数字可能被转换成二进制、八进制、十六进制，此时关联用户输入的响应性数据的副作用有三个。我们需要一个**合理的数据结构**来保存副作用。
 
-最后，我们需要明确**状态与副作用的关联**。在使用 Vue 2 的写法时，我们明确地创建了副作用函数与`obj.key`的关联；而在使用 Proxy 的版本时，当我们修改`proxyObj`的其他属性，甚至是添加一个不存在的属性时，也会导致 setter 的执行，从而触发副作用函数。理想情况下，我们希望只在`proxyObj.key`变化的时候才执行副作用函数。
+最后，我们需要明确**状态与副作用的关联**。在使用 Vue 2 的写法时，我们明确地创建了副作用函数与`obj.key`的关联；而在使用 Proxy 的版本时，当我们修改`proxyObj`的其他属性，甚至是添加一个不存在的属性时，也会导致 setter 的执行，从而触发副作用函数。我们希望**只在`proxyObj.key`变化**的时候才执行副作用函数。
 
 另外，我们还要想到一个应用中可能包含多个响应性对象。如果要收集程序中所有的响应性对象、每个对象的键关联的副作用函数的信息，我们还需要一个最顶层的数据结构。
 
@@ -117,17 +119,19 @@ type Bucket = WeakMap<Object, DepsMap>
 与 Map 不同，WeakMap 仅支持使用对象作为键。同时，WeakMap 对键是弱引用，当没有其他引用时，键值对会被回收无法访问。
 
 ```ts
-const map = new Map()
-const weakmap = new WeakMap()(function () {
+const map = new Map();
+const weakmap = new WeakMap();
+
+(function () {
   const foo = { k: 1 }
   const bar = { k: 2 }
 
   map.set(foo, 'foo')
   weakmap.set(bar, 'bar')
-})()
+})();
 
 console.log(map) // { k: 1 } => 'foo'
-console.log(weakmap) // {}（无属性）
+console.log(weakmap) // 无属性 {}
 ```
 
 因此，WeakMap 常用于储存那些当键存在时才有价值的信息。

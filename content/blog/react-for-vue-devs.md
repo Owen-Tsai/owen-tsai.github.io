@@ -141,7 +141,7 @@ Vue3 引入了 composition API，从 React 的 hooks 中汲取了灵感。
 
 曾经 React 和 Vue 都尝试过使用 mixins 来封装一组具有状态的可复用逻辑，但最后都被 hooks 取代，因为 mixins 存在着各种各样的问题，包括：
 
-- **引入了隐式依赖。**如果一个 mixin 需要读取组件中的某个状态，而这个状态可能会在很久之后被转移到更高层的组件中，此时忘记更新对应的 mixin 的例子比比皆是。在 Vue 中，如果一个方法读取`this.state`，那么`state`可能存在于组件所引入的任何一个 mixin 中，开发和维护的体验极差。
+- **引入了隐式依赖**。如果一个 mixin 需要读取组件中的某个状态，而这个状态可能会在很久之后被转移到更高层的组件中，此时忘记更新对应的 mixin 的例子比比皆是。在 Vue 中，如果一个方法读取`this.state`，那么`state`可能存在于组件所引入的任何一个 mixin 中，开发和维护的体验极差。
 - **滚雪球似的复杂度提升**。一个 mixin 内可能依赖另一个 mixin 的状态，造成 mixin 之间的强耦合关系。
 
 在 React 中，hooks 的编写需要遵照规范，例如使用`use*`作为 hook 的名称前缀、只在组件的顶层调用（而非某一个 if 分支或其他 hooks 中）等。诸如[vueuse](https://vueuse.org/)之类的 Vue composition 函数库也承袭了 React hooks 的风格。
@@ -330,7 +330,9 @@ export default function Comp({ id }) {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    fetch('/api/endpoint').then((res) => {
+    fetch('/api/endpoint', {
+      params: { id }
+    }).then((res) => {
       setData(res)
     })
   }, [id])
@@ -346,6 +348,26 @@ export default function Comp({ id }) {
 ::box{theme='warning'}
 在开发模式下，React 将重新渲染一次组件，以便发现潜在的 BUG。这是正常的行为，但同时也是一个 gotcha 陷阱。
 ::
+
+在 Vue 中，副作用可以在多个 hook 中执行，例如`onMounted`, `onBeforeUnmount`等，或者可以通过`watch`和`watchEffect`来观察响应式数据的变化并执行副作用。相比于 React 的`useEffect`，Vue 提供的选择更多，粒度更细。
+
+```ts
+const { id } = defineProps({ /* ... */ })
+
+const data = ref()
+
+watch(id, (val) => {
+  fetch('/api/endpoint', {
+    params: { id }
+  }).then((res) => {
+    data.value = res
+  })
+})
+```
+
+对比 Vue 和 React 中关于副作用的处理，我们不难发现 Vue 将副作用与它的核心——响应式数据相结合，框架在运行时收集依赖；React 的心智模型则是将副作用与组件渲染周期同步，当组件渲染后，根据声明的依赖是否变化，来决定是否执行副作用代码。
+
+总的来说，在副作用处理上，Vue 的响应式系统提供了更好的开发体验和更低的出错概率。React 的`useEffect`灵活性极高，但 Vue 的 API 也覆盖了几乎所有场景，即便抽象层级稍高也完全可以接受。
 
 ## 下一步？
 

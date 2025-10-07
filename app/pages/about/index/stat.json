@@ -1,0 +1,21 @@
+{
+  "books": [
+    {
+      "title": "鼠疫",
+      "author": "Albert Camus",
+      "subtitle": "「鼠疫就是生活，不过如此」"
+    }
+  ],
+  "games": [
+    {
+      "title": "Abiotic Factor / 非生物因素",
+      "tags": ["Coop", "Survival", "Retro"],
+      "desc": "Need a teammate"
+    },
+    {
+      "title": "Dying Light: The Beast",
+      "tags": ["Horror", "Action", "FPS"],
+      "desc": "The best zombie game is back"
+    }
+  ]
+}

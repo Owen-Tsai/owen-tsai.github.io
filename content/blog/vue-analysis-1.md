@@ -17,7 +17,17 @@ tags:
 
 在 Vue SFC 中，我们使用与 HTML 中类似的方式描述元素和属性。同时，Vue 为我们扩展了语法，可以使用`v-bind`和`v-on`来分别描述动态绑定的属性与事件。同时，元素之间的父子关系和层级结构也通过与 HTML 相同的树形方式表示。
 
-而在使用 JavaScript 对象描述 UI 时则更加灵活，因为在使用 JS 对象描述 UI 时可以使用 JS 的编程能力。例如假设我们需要表示一个标题，根据级别的不同渲染 h1~h6 这几个不同的标签，在使用 SFC 时我们不得不穷举，使用`v-if`和`v-else-if`列举所有情况。而当我们使用 JS 对象描述时，就非常简单了：
+```html
+<template>
+  <div @click="handleClick">
+    <h1 :class="cls">{{ title }}</h1>
+  </div>
+</template>
+```
+
+我们也可以直接使用 JavaScript 对象描述 UI。事实上，使用`<template>`描述的 UI 会在编译阶段被编译器处理成 JavaScript 对象（参见下文）。
+
+在使用 JavaScript 对象描述 UI 时则更加灵活，因为在使用 JS 对象描述 UI 时可以使用 JS 的编程能力。例如假设我们需要表示一个标题，根据级别的不同渲染 h1~h6 这几个不同的标签，在使用 SFC 时我们不得不穷举，使用`v-if`和`v-else-if`列举所有情况。而当我们使用 JS 对象描述时，就非常简单了：
 
 ```ts
 const title = (level: number) => ({
@@ -27,9 +37,9 @@ const title = (level: number) => ({
 title(3) // // => h3 标签
 ```
 
-这种描述形式实际上就是虚拟 DOM。
+通过使用 JS 数据结构来表示 UI 的方式就是虚拟 DOM。
 
-在 Vue 的虚拟 DOM 中包含了很多属性，与 DOM 树类似，这些属性构成了一个树形结构，用于描述组件构成的 UI。我们可以通过`h`函数构建一个虚拟 DOM 的节点（或称为 VNode）：
+在 Vue 的虚拟 DOM 中包含了很多属性，与 DOM 树中节点的属性类似。我们可以通过`h`函数构建一个包含`class`属性的虚拟 DOM 的节点（或称为 VNode）：
 
 ```ts
 import { h } from 'vue'
@@ -248,14 +258,14 @@ export default {
 
 ```ts
 render() {
-  return h(
-    'button',
-    {
+  return {
+    tag: 'button',
+    props: {
       id: 'foo',
-      class: cls
+      class: cls,
     },
-    'Click Me'
-  )
+    children: 'Click Me',
+  }
 }
 ```
 
@@ -263,9 +273,23 @@ render() {
 
 当然，我们可以直接让渲染器直接按照新的渲染函数创建新的 DOM，或者使用 diff 算法比较两个虚拟 DOM 树的差异来进行更新，但这两种方式带来的性能损耗都过大。渲染器（显而易见地）在运行时工作，低下的效率将大大降低用户体验。
 
-实际上，我们并非等到运行时的渲染阶段才能知道哪些属性是动态的、需要跟踪的。在编译阶段，我们就能获取到相关的信息。Vue 的做法是在虚拟 DOM 节点上创建一个标志位`patchFlag`，以其值来标识虚拟节点属性中可能发生变化的部分。
+实际上，我们并非等到运行时的渲染阶段才能知道哪些属性是动态的、需要跟踪的。在编译阶段，我们就能获取到相关的信息。Vue 的做法是在虚拟 DOM 节点上创建一个标志位`patchFlags`，以其值来标识虚拟节点属性中可能发生变化的部分。
 
-例如，当`class`是动态的，而其他属性（例如`id`）都是静态的时，编译器可以在编译阶段设置`patchFlag = 2`，这样当渲染器在寻找变更点时，可以跳过这个 VNode 的 props 中除了`class`之外的部分的比较。
+例如，当`class`是动态的，而其他属性（例如`id`）都是静态的时，编译器可以在生成代码时就设置`patchFlags = 2`，这样当渲染器在寻找变更点时，可以跳过这个 VNode 的 props 中除了`class`之外的部分的比较。
+
+```ts
+render() {
+  return {
+    tag: 'button',
+    props: {
+      id: 'foo',
+      class: cls,
+    },
+    patchFlags: 2,
+    children: 'Click Me',
+  }
+}
+```
 
 更多关于编译器的处理和优化逻辑可参见编译器专题。
 

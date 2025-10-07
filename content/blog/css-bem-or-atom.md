@@ -12,7 +12,7 @@ Web 应用开发技术在过去的日子里得到了突飞猛进的发展，各�
 随着经手的项目越来越多，对于样式这个绕不开的话题也已经有了不少探索。CSS 严格来讲不是编程语言，因此存在很多问题。其中有一些，即便使用诸如 Sass 或 Less 之类的预处理器，也无法完全绕过或消除。于是在过去的十年里，人们对于如何降低样式的开发和维护难度进行了几乎不间断的、持续至今的讨论。
 
 ::box{title='强烈推荐！'}
-在早些时候，人们会拼命向初学 Web 开发技术的新手们推荐 **“Separation of Concerns（关注点分离）”**。[CSS Zen Garden](http://www.csszengarden.com/) 是 SoC 案例的绝妙展现。这个网站上的设计成果向大家展示了一个遵循 SoC 的页面仅仅只靠更换样式表就能实现几乎完全不同的外观和风格。
+[CSS Zen Garden](http://www.csszengarden.com/) 是 SoC 的绝妙展现。这个网站上的设计成果向大家展示了一个遵循 SoC 的页面仅仅只靠更换样式表就能实现几乎完全不同的外观和风格。
 ::
 
 ## BEM 命名约定
@@ -122,7 +122,7 @@ BEM 似乎消除了 CSS 中经常会遇到的问题。它通过`block__element--
   <div class="card__content">
     <div class="card__title">And Then There Were None</div>
     <div class="card__bio">...</div>
-    <button class="btn btn--primary btn--large">MORE</button>
+    <button class="card__action-item btn btn--primary btn--large">MORE</button>
   </div>
 </div>
 ```
