@@ -5,7 +5,7 @@
       <Toc v-if="data?.body.toc" :links="data?.body.toc.links" />
     </div>
     <div
-      class="prose prose-slate prose-invert prose-headings:text-slate-200 prose-pre:bg-slate-500/10 mx-auto"
+      class="prose prose-slate prose-invert prose-headings:text-slate-200 prose-pre:bg-slate-500/20 mx-auto"
     >
       <h1 class="text-4xl font-semibold flex items-start">
         {{ data?.title }}

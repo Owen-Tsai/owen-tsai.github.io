@@ -587,8 +587,8 @@ const proxyObj = new Proxy(data, {
     return target[key]
   },
   set(target, key: string, newValue) {
-    trigger(target, key)
     target[key] = newValue
+    trigger(target, key)
     return true
   },
 })
@@ -603,5 +603,7 @@ setTimeout(() => {
   proxyObj.key = 'hello'
 }, 4000)
 ```
+
+分析这段代码，可以看到为`data`创建了`proxyObj`这一响应式对象，并且对 getter 和 setter 进行设置，使得读取`proxyObj`的属性时会触发`track`函数，而设置`proxyObj`的属性时会触发`trigger`函数。通过`effect`实现副作用的注册，在副作用函数即`fn()`的执行前，`activeEffect`会被设置为当前正在执行的副作用，在执行期间所有对响应式数据的读取操作触发`track`函数时，都会将当前的`activeEffect`收集为依赖。当当前的副作用函数执行完毕，恢复`activeEffect`为之前的副作用。最后，当写入响应式数据的属性时，触发`trigger`，执行属性依赖的副作用。
 
 到目前为止程序已经实现了响应性系统的基本功能。我们已经知道了当响应性数据`data`发生变化后，如何触发视图的更新。接下来我们还需要讨论其他的场景，例如`computed`、`watch`等的实现原理，最终建立一个（更更）完善的响应系统。

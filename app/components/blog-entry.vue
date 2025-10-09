@@ -20,12 +20,12 @@
       class="col-span-12 lg:col-span-3 row-start-1 lg:row-start-auto relative w-full pointer-events-none lg:py-2"
     >
       <div
-        class="lg:absolute top-1/2 lg:-translate-y-1/2 flex items-center gap-4 scale-100 lg:scale-0 group-hover:scale-100 transition-transform duration-300 w-full"
+        class="lg:absolute top-1/2 lg:-translate-y-1/2 flex items-center gap-4 scale-100 lg:scale-0 group-hover:scale-100 transition-transform duration-300 w-full left-0 right-0"
       >
         <div class="hidden lg:block dot"></div>
         <NuxtImg
           :src="`/cover/${item.cover}`"
-          class="flex-1 lg:aspect-[16/10] pointer-events-none z-1 bg-slate-950 h-full w-full"
+          class="flex-1 lg:aspect-[16/10] pointer-events-none z-1 bg-slate-950 min-w-0"
         />
         <div class="hidden lg:block dot"></div>
       </div>
@@ -102,7 +102,9 @@ onBeforeUnmount(() => {
 .dot {
   height: 8px;
   width: 8px;
+  flex: none;
   background-color: var(--color-slate-200);
+  min-width: 0;
   /* border-radius: 50%; */
 }
 </style>
