@@ -380,7 +380,7 @@ export const useHero = () => {
             currX += p.textWidth(char) // 95%字宽（轻微重叠）
           } else {
             // 空格：只移动位置不创建形状
-            currX += p.textWidth(' ')
+            currX += p.textWidth('L')
           }
         }
 
