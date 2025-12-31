@@ -169,8 +169,8 @@ BEM 似乎消除了 CSS 中经常会遇到的问题。它通过`block__element--
 <div class="card flex gap-4">
   <img src="/example/img.png" class="w-1/3 object-cover" />
   <div class="w-2/3">
-    <div class="text-lg text-gray-8">And Then There Were None</div>
-    <div class="text-gray-5">...</div>
+    <div class="text-lg text-slate-8">And Then There Were None</div>
+    <div class="text-slate-5">...</div>
     <button class="btn btn--primary btn--large">MORE</button>
   </div>
 </div>
@@ -242,7 +242,7 @@ BEM 似乎消除了 CSS 中经常会遇到的问题。它通过`block__element--
 .card {
   @apply p-4 flex flex-col md:flex-row gap-4 md:gap-6;
   &__title {
-    @apply text-lg font-bold text-gray-8 dark:text-gray-2 my-4;
+    @apply text-lg font-bold text-slate-8 dark:text-slate-2 my-4;
   }
   &__content {
     // ...

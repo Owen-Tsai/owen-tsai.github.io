@@ -2,10 +2,16 @@
   white-space: break-spaces;
 }
 
-.box {
-  ul, ol {
+.callout {
+  ul,
+  ol {
     margin-top: 0rem;
     margin-bottom: 0rem;
+  }
+
+  strong {
+    color: inherit;
+    font-weight: bold;
   }
 }
 

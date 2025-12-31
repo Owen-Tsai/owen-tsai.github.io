@@ -1,8 +1,8 @@
 {
   "editor.formatOnSave": true,
-  "editor.fontSize": 15,
-  "editor.fontWeight": "600",
+  "editor.fontSize": 16,
+  "editor.fontWeight": "500",
   "editor.fontLigatures": true,
-  "editor.lineHeight": 1.8,
+  "editor.lineHeight": 1.6,
   "terminal.integrated.fontSize": 14
 }

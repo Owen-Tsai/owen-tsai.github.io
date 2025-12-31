@@ -27,7 +27,12 @@
               </template>
               <template v-else>
                 <span class="font-mono">0{{ i + 1 }}</span>
-                <a :href="item.href" target="_blank" class="block py-4 font-bold text-3xl flex-1">
+                <a
+                  :href="item.href"
+                  target="_blank"
+                  class="block py-4 font-bold text-3xl flex-1"
+                  @click="unlock('github')"
+                >
                   {{ item.name }}
                 </a>
               </template>
@@ -40,9 +45,16 @@
 </template>
 
 <script setup lang="ts">
+const { unlock } = useAchievements()
+
+const { data } = await useAsyncData(() => {
+  return queryCollection('work').select('path').first()
+})
+
 const menuItems = [
   { name: 'Home', to: '/' },
   { name: 'Blog', to: '/blog' },
+  { name: 'Work', to: data.value!.path },
   { name: 'About', to: '/about' },
   { name: 'Github', to: 'https://github.com/Owen-Tsai' },
   { name: 'Get my Resume', href: '/resume.pdf' },

@@ -31,7 +31,8 @@ export default defineNuxtConfig({
       markdown: {
         highlight: {
           theme: {
-            default: 'material-theme-ocean',
+            default: 'slack-ochin',
+            dark: 'houston',
           },
         },
       },

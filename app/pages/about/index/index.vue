@@ -72,4 +72,10 @@
 
 <script setup lang="ts">
 import portrait from '~/assets/img/portrait.jpg'
+
+const { unlock } = useAchievements()
+
+onMounted(() => {
+  unlock('about')
+})
 </script>

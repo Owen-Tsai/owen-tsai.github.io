@@ -11,5 +11,14 @@ export default defineContentConfig({
         cover: z.string(),
       }),
     }),
+    work: defineCollection({
+      type: 'page',
+      source: 'work/*.md',
+      schema: z.object({
+        title: z.string(),
+        entry: z.string(),
+        idx: z.number(),
+      }),
+    }),
   },
 })

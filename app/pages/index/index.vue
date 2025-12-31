@@ -9,7 +9,7 @@
       <a
         href="/resume.pdf"
         target="_blank"
-        class="cta relative border border-slate-200 px-6 py-2 rounded-full flex flex-col items-center justify-center"
+        class="cta relative border border-slate-300 text-slate-100 px-6 py-2 rounded-full flex flex-col items-center justify-center"
         @mouseenter="playTweens"
         @mouseleave="reverseTweens"
       >

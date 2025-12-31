@@ -22,13 +22,31 @@ const iconName = computed(() => {
       return 'ri:information-2-fill'
   }
 })
+
+const themeCls = computed(() => {
+  switch (theme) {
+    case 'info':
+      return 'bg-blue-500/10 border-blue-500/25 text-blue-600 dark:bg-blue-400/10 dark:border-blue-400/25 dark:text-blue-300 dark:[&_a]:text-blue-400'
+    case 'danger':
+      return 'bg-red-500/10 border-red-500/25 text-red-600 dark:bg-red-400/10 dark:border-red-400/25 dark:text-red-300 dark:[&_a]:text-red-400'
+    case 'warning':
+      return 'bg-yellow-500/10 border-yellow-500/25 text-yellow-600 dark:bg-yellow-400/10 dark:border-yellow-400/25 dark:text-yellow-300 dark:[&_a]:text-yellow-400'
+    case 'success':
+      return 'bg-green-500/10 border-green-500/25 text-green-600 dark:bg-green-400/10 dark:border-green-400/25 dark:text-green-300 dark:[&_a]:text-green-400'
+    default:
+      return undefined
+  }
+})
 </script>
 
 <template>
-  <div :class="[`box-${theme}`, title ? 'items-start' : 'items-center']" class="flex gap-4 box">
+  <div
+    :class="['callout', themeCls, title ? 'items-start' : 'items-center']"
+    class="flex gap-4 box"
+  >
     <Icon
       :name="iconName"
-      :size="20"
+      :size="24"
       class="min-w-0 flex-none icon"
       :class="title ? 'mt-3px' : null"
     />
@@ -42,31 +60,7 @@ const iconName = computed(() => {
 <style scoped>
 @reference 'tailwindcss';
 
-.box-info {
-  @apply bg-gradient-to-tl from-[70%] to-[120%] from-[#111a2c] to-[#15325b] rounded-lg border-[#15325b] border text-neutral-300 p-4;
-  .icon {
-    @apply text-blue-500;
-  }
-}
-
-.box-warning {
-  @apply bg-gradient-to-tl from-[70%] to-[120%] from-[#2b2111] to-[#594214] rounded-lg border-[#594214] border text-neutral-300 p-4;
-  .icon {
-    @apply text-yellow-500;
-  }
-}
-
-.box-danger {
-  @apply bg-gradient-to-tl from-[70%] to-[120%] from-[#2c1618] to-[#5b2526] rounded-lg border-[#5b2526] border text-neutral-300 p-4;
-  .icon {
-    @apply text-red-500;
-  }
-}
-
-.box-success {
-  @apply bg-gradient-to-tl from-[70%] to-[120%] from-[#162312] to-[#274916] rounded-lg border-[#274916] border text-neutral-300 p-4;
-  .icon {
-    @apply text-green-500;
-  }
+.callout {
+  @apply rounded-lg border px-4 py-3;
 }
 </style>

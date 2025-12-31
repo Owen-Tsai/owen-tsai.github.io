@@ -5,8 +5,8 @@
         BLOG<sup class="text-2xl">({{ data?.length }})</sup>
       </h1>
     </div>
-    <div class="border-t border-slate-800 py-6">
-      <div class="hidden lg:grid grid-cols-12 gap-4 text-sm text-slate-500 py-2">
+    <div class="border-t border-gray-200 dark:border-gray-800 py-6">
+      <div class="hidden lg:grid grid-cols-12 gap-4 text-sm text-gray-500 py-2">
         <div class="col-span-7">TITLE</div>
         <div class="col-span-3">TOPIC</div>
         <div class="col-span-2 text-right">DATE</div>

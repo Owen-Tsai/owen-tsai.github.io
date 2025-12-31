@@ -11,7 +11,7 @@ const props = defineProps<{
     <li v-for="item in props.links" :key="item.id">
       <a
         :href="`#${item.id}`"
-        class="underline-link leading-loose text-slate-500 hover:text-slate-300 truncate inline-block max-w-full"
+        class="underline-link leading-loose text-slate-500 hover:text-slate-950 dark:hover:text-slate-200 truncate inline-block max-w-full"
       >
         {{ item.text }}
       </a>

@@ -13,11 +13,21 @@ type BoundingBox = {
 
 export const useHero = () => {
   const { $p5 } = useNuxtApp()
+  const isDark = useDark()
+  const { unlock } = useAchievements()
 
   const borderPercentage = computed(() => (isMobile.value ? 0.1 : 0.25))
 
   const isDistorted = ref(false)
   const isMounted = useMounted()
+
+  let pauseDetect = false
+
+  watch(isDistorted, (newVal) => {
+    if (newVal === true) {
+      unlock('randomDistort')
+    }
+  })
 
   const sketch = (p: P5) => {
     let font: P5.Font, font2: P5.Font
@@ -41,11 +51,6 @@ export const useHero = () => {
       textBox = new TextBox(p.width / 2, p.height / 2, TEXT_SIZE, text!, font)
     }
 
-    // p.preload = () => {
-    //   font = p.loadFont('/ruigslay.ttf')
-    //   font2 = p.loadFont('/montserrat.ttf')
-    // }
-
     p.windowResized = () => {
       p.resizeCanvas(p.windowWidth, p.windowHeight)
       textBox.placeOnCanvas()
@@ -64,15 +69,13 @@ export const useHero = () => {
 
     p.draw = () => {
       p.clear()
-      p.fill('#cdd5df')
-      p.stroke('#cdd5df')
+      p.fill(isDark.value ? '#e5e7eb' : '#030712')
+      p.stroke(isDark.value ? '#e5e7eb' : '#030712')
       mouse.update()
       textBox.draw()
 
       p.textSize(isMobile.value ? 12 : 14)
-      ;(p as any).textFont(font2, {
-        fontVariationSettings: '"wght" 400',
-      })
+      ;(p as any).textFont(font2)
 
       if (isMobile.value) {
         p.text('Tap for random distortion', textBox.boundingBox.x, textBox.boundingBox.y - 20)
@@ -169,6 +172,11 @@ export const useHero = () => {
           this.targetPosition.y += mouse.vel.y * factor
           // 标记为扭曲状态
           // isDistorted.value = true
+        }
+
+        if (distanceSquared < 100 && !pauseDetect) {
+          unlock('distort')
+          pauseDetect = true
         }
 
         // 使用线性插值平滑移动到目标位置
