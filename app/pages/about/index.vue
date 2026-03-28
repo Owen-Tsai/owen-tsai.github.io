@@ -53,14 +53,15 @@
           </h3>
           <div class="flex gap-6">
             <a
-              href="#"
+              href="https://github.com/owen-tsai"
+              target="_blank"
               class="text-zinc-500 hover:text-zinc-50 transition-colors flex items-center gap-2"
             >
               <Github class="w-5 h-5" />
               <span class="text-sm">GitHub</span>
             </a>
             <a
-              href="#"
+              href="mailto:owen-tsai.v@gmail.com"
               class="text-zinc-500 hover:text-zinc-50 transition-colors flex items-center gap-2"
             >
               <Mail class="w-5 h-5" />

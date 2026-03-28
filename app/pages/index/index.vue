@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import Canvas from './canvas'
+import Canvas from '../../utils/canvas'
 
 const canvas = useTemplateRef('canvas')
 let canvasInstance: Canvas
