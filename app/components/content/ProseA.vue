@@ -1,28 +1,21 @@
 <template>
   <NuxtLink
-    :href="props.href"
-    :target="isExternal ? '_blank' : props.target"
-    class="inline-flex items-center text-blue-500"
+    class="inline-flex items-center font-light"
+    :href="href"
+    :target="isExternal ? '_blank' : target"
   >
     <slot />
-    <Icon v-if="isExternal" name="ri:arrow-right-up-long-line" />
+    <ExternalLink v-if="isExternal" class="ml-1 w-4 h-4" />
   </NuxtLink>
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-  href: {
-    type: String,
-    default: '',
-  },
-  target: {
-    type: String as PropType<
-      '_blank' | '_parent' | '_self' | '_top' | (string & object) | null | undefined
-    >,
-    default: undefined,
-    required: false,
-  },
-})
+import { ExternalLink } from 'lucide-vue-next'
 
-const isExternal = computed(() => props.href?.startsWith('http'))
+const { href = '' } = defineProps<{
+  href: string
+  target?: '_blank' | '_parent' | '_self' | '_top' | (string & object) | null | undefined
+}>()
+
+const isExternal = computed(() => href.startsWith('http'))
 </script>

@@ -4,36 +4,27 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-
+  modules: [
+    '@nuxt/content',
+    '@nuxt/eslint',
+    '@vueuse/nuxt',
+    '@nuxt/image',
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
-
   nitro: {
     prerender: {
       crawlLinks: true,
       routes: ['/'],
     },
   },
-
-  css: ['~/assets/css/index.css'],
-
-  app: {
-    head: {
-      title: 'Owen | Web Dev',
-    },
-  },
-
-  modules: ['@nuxt/content', '@nuxt/eslint', '@nuxt/icon', '@nuxt/image', '@vueuse/nuxt'],
-
+  css: ['~/styles/index.css'],
   content: {
     build: {
       markdown: {
         highlight: {
-          theme: {
-            default: 'slack-ochin',
-            dark: 'houston',
-          },
+          theme: 'houston',
         },
       },
     },

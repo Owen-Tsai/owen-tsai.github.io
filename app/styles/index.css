@@ -1,0 +1,39 @@
+@import './tailwind.css';
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-zinc-950;
+}
+
+.canvas-wrapper canvas {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.router-active {
+  @apply text-white;
+}
+
+.slide-up-enter-from,
+.slide-up-leave-to {
+  transform: translateY(16px);
+  opacity: 0;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.2s ease-in-out;
+}
+
+.callout ul {
+  margin-bottom: 0;
+}
+
+.prose pre span.highlight {
+  @apply bg-zinc-500/20;
+}

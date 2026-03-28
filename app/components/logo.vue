@@ -1,63 +1,86 @@
 <template>
-  <NuxtLink
-    to="/"
-    class="flex items-center gap-[1px]"
-    @mouseenter="onMouseEnter"
-    @mouseleave="onMouseLeave"
-  >
-    <div ref="svgRef" class="font-[ruigslay] text-2xl origin-left">O</div>
-    <div ref="textRef" class="font-[ruigslay] text-2xl">wen.</div>
+  <NuxtLink to="/" class="pointer-events-auto cursor-pointer">
+    <h1 class="text-zinc-50 tracking-tighter">Owen, yet another <span ref="targetEl"></span></h1>
   </NuxtLink>
 </template>
 
 <script setup lang="ts">
-const svgRef = useTemplateRef('svgRef')
-const textRef = useTemplateRef('textRef')
+import gsap from 'gsap'
+import scrambleText from 'gsap/dist/ScrambleTextPlugin'
 
-const { $gsap } = useNuxtApp()
+gsap.registerPlugin(scrambleText)
 
-let tween: gsap.core.Timeline | null = null
+const targetEl = useTemplateRef('targetEl')
+const tl = gsap.timeline({ repeat: -1 })
 
-const onMouseEnter = () => {
-  tween?.play()
-}
-
-const onMouseLeave = () => {
-  tween?.reverse()
+const startAnim = () => {
+  tl.to(targetEl.value!, {
+    scrambleText: {
+      text: 'web developer.',
+      chars: '!@#$%^&*()_+~`|}{[]:;?><,./-=',
+    },
+    duration: 1,
+  })
+    .to(targetEl.value!, {
+      scrambleText: {
+        text: '',
+        chars: '!@#$%^&*()_+~`|}{[]:;?><,./-=',
+      },
+      duration: 1,
+      delay: 1,
+    })
+    .to(targetEl.value!, {
+      scrambleText: {
+        text: 'game enthusiast.',
+        chars: '!@#$%^&*()_+~`|}{[]:;?><,./-=',
+      },
+      duration: 1,
+    })
+    .to(targetEl.value!, {
+      scrambleText: {
+        text: '',
+        chars: '!@#$%^&*()_+~`|}{[]:;?><,./-=',
+      },
+      duration: 1,
+      delay: 1,
+    })
+    .to(targetEl.value!, {
+      scrambleText: {
+        text: 'Honkaku lover.',
+        chars: '!@#$%^&*()_+~`|}{[]:;?><,./-=',
+      },
+      duration: 1,
+    })
+    .to(targetEl.value!, {
+      scrambleText: {
+        text: '',
+        chars: '!@#$%^&*()_+~`|}{[]:;?><,./-=',
+      },
+      duration: 1,
+      delay: 1,
+    })
+    .to(targetEl.value!, {
+      scrambleText: {
+        text: 'fan of Harrry Potter.',
+        chars: '!@#$%^&*()_+~`|}{[]:;?><,./-=',
+      },
+      duration: 1,
+    })
+    .to(targetEl.value!, {
+      scrambleText: {
+        text: '',
+        chars: '!@#$%^&*()_+~`|}{[]:;?><,./-=',
+      },
+      duration: 1,
+      delay: 1,
+    })
 }
 
 onMounted(() => {
-  tween = $gsap.timeline({
-    paused: true,
-  })
-  tween.fromTo(
-    svgRef.value,
-    {
-      scale: 1.8,
-    },
-    {
-      scale: 1,
-      duration: 0.2,
-      ease: 'power1.inOut',
-    }
-  )
-  tween.fromTo(
-    textRef.value,
-    {
-      x: -8,
-      opacity: 0,
-    },
-    {
-      x: 0,
-      opacity: 1,
-      duration: 0.2,
-      ease: 'power1.inOut',
-    },
-    '>-0.1'
-  )
+  startAnim()
 })
 
 onBeforeUnmount(() => {
-  tween?.kill()
+  tl.kill()
 })
 </script>
