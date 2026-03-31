@@ -37,3 +37,13 @@ body {
 .prose pre span.highlight {
   @apply bg-zinc-500/20;
 }
+
+.font-display {
+  font-family: 'Space Grotesk', sans-serif;
+}
+.font-artistic {
+  font-family: 'Cormorant Garamond', serif;
+}
+.font-monospaced {
+  font-family: 'Space Mono', monospace;
+}
