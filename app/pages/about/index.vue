@@ -2,9 +2,11 @@
   <div class="p-6 md:p-12 pt-32 md:pt-48 max-w-5xl mx-auto min-h-screen">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-6">
       <div class="md:col-span-5">
-        <h1 class="text-4xl md:text-6xl font-light tracking-tighter text-zinc-50 sticky top-48">
+        <h1
+          class="text-4xl md:text-6xl font-light tracking-tighter font-display text-zinc-50 sticky top-48"
+        >
           Engineer.<br />
-          Creator.<br />
+          <span class="font-artistic italic">Creator.</span><br />
           Me.
         </h1>
       </div>

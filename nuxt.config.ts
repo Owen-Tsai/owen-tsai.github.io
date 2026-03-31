@@ -5,6 +5,13 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@nuxt/content', '@nuxt/eslint', '@vueuse/nuxt', '@nuxt/image', '@nuxt/fonts'],
+  hooks: {
+    'build:done': () => {
+      setTimeout(() => {
+        process.exit(0)
+      }, 6666)
+    },
+  },
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
