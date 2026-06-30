@@ -8,6 +8,7 @@ import { useGSAP } from '@gsap/react'
 import Link from '../Link'
 import FlipText from '../FlipText'
 import MobileMenu from '../MobileMenu'
+import CursorLabel from '../CursorLabel'
 import { useLoader } from '@/components/Loader/context'
 
 export default function Navbar({ className }: CommonProps) {
@@ -80,9 +81,15 @@ export default function Navbar({ className }: CommonProps) {
         >
           <FlipText text="Writings" allowFlip={!isActive('/writings')} />
         </Link>
-        <Link href="/play" className={cn('nav-link link opacity-0', { active: isActive('/play') })}>
-          <FlipText text="Play" allowFlip={!isActive('/play')} />
-        </Link>
+        <CursorLabel label="coming soon">
+          <span
+            data-cursor-item
+            className="nav-link opacity-40 line-through cursor-default"
+            aria-disabled="true"
+          >
+            &nbsp;Play&nbsp;
+          </span>
+        </CursorLabel>
         <Link
           href="/about"
           className={cn('nav-link link opacity-0', { active: isExactActive('/about') })}
@@ -92,10 +99,10 @@ export default function Navbar({ className }: CommonProps) {
       </nav>
 
       <div className="hidden lg:col-span-3 col-span lg:flex items-center justify-end gap-6">
-        <Link href="https://github.com/Owen-Tsai" className="link opacity-0">
+        <Link href="https://github.com/Owen-Tsai" target="_blank" className="link opacity-0">
           <FlipText text="Github" />
         </Link>
-        <Link href="mailto:hello@example.com" className="link opacity-0">
+        <Link href="mailto:owentsai.v@gmail.com" className="link opacity-0">
           <FlipText text="Mail" />
         </Link>
       </div>

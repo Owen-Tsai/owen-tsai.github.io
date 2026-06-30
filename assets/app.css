@@ -9,7 +9,7 @@ body {
   border-bottom-color: var(--color-text-primary);
   font-weight: 900;
 }
-.nav-link:not(.active):hover {
+.nav-link:not(.active):not([aria-disabled='true']):hover {
   border-bottom-color: var(--color-text-primary);
 }
 

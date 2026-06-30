@@ -3,7 +3,7 @@
 import Link from '@/components/Link'
 import CursorLabel from '@/components/CursorLabel'
 import { padStart } from 'lodash-es'
-import { MoveUpRight } from 'lucide-react'
+import { TerminalIcon } from 'lucide-react'
 import cn from 'classnames'
 import { forwardRef } from 'react'
 
@@ -20,6 +20,7 @@ const ArticleList = forwardRef<HTMLDivElement, ArticleListProps>(({ articles, cl
           href={`/writings/${item.slug}`}
           key={item.slug}
           data-cursor-item
+          data-slug={item.slug}
           className="entry grid grid-cols-12 border-t border-t-border-primary py-10 group bg-bg-primary hover:bg-transparent"
         >
           <div className="font-mono hidden md:block col-span-2 text-text-tertiary text-caption">
@@ -42,12 +43,15 @@ const ArticleList = forwardRef<HTMLDivElement, ArticleListProps>(({ articles, cl
     </>
   )
 
-  const cursorLabel = (
-    <div className="inline-flex items-center gap-1">
-      <span className="font-bold leading-0 text-sm">READ</span>
-      <MoveUpRight size={16} />
-    </div>
-  )
+  const cursorLabel = (hoveredElement: Element | null) => {
+    const slug = hoveredElement?.getAttribute('data-slug') ?? 'slug'
+    return (
+      <div className="inline-flex items-center gap-1">
+        <TerminalIcon size={16} />
+        <span className="font-mono leading-0 text-sm">cd ./{slug}</span>
+      </div>
+    )
+  }
 
   return (
     <CursorLabel ref={ref} className={cn(className, 'relative')} label={cursorLabel}>

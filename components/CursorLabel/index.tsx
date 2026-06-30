@@ -6,7 +6,7 @@ import cn from 'classnames'
 import style from './CursorLabel.module.css'
 
 interface CursorLabelProps extends CommonProps {
-  label: React.ReactNode
+  label: React.ReactNode | ((hoveredElement: Element | null) => React.ReactNode)
   itemSelector?: string
   offset?: { x?: number; y?: number }
   duration?: number
@@ -32,6 +32,7 @@ const CursorLabel = forwardRef<HTMLDivElement, CursorLabelProps>(
     const cursorY = useRef<ReturnType<typeof gsap.quickTo> | null>(null)
     const isVisibleRef = useRef(false)
     const [isVisible, setIsVisible] = useState(false)
+    const [activeItem, setActiveItem] = useState<Element | null>(null)
 
     useEffect(() => {
       isVisibleRef.current = isVisible
@@ -59,6 +60,8 @@ const CursorLabel = forwardRef<HTMLDivElement, CursorLabelProps>(
         setIsVisible(isHovering)
       }
 
+      setActiveItem((prev) => (prev === item ? prev : item))
+
       if (!isHovering || !cursorRef.current || !cursorX.current || !cursorY.current) return
 
       const x = e.clientX + (offset.x ?? 16)
@@ -74,6 +77,7 @@ const CursorLabel = forwardRef<HTMLDivElement, CursorLabelProps>(
 
     const handleMouseLeave = () => {
       setIsVisible(false)
+      setActiveItem(null)
     }
 
     return (
@@ -92,7 +96,11 @@ const CursorLabel = forwardRef<HTMLDivElement, CursorLabelProps>(
       >
         {children}
         <div ref={cursorRef} className={cn(style.cursor, { [style.cursorVisible]: isVisible })}>
-          {typeof label === 'string' ? <span className={style.label}>{label}</span> : label}
+          {typeof label === 'function'
+            ? label(activeItem)
+            : typeof label === 'string'
+              ? <span className={style.label}>{label}</span>
+              : label}
         </div>
       </div>
     )

@@ -7,6 +7,7 @@ import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
 import { useLoader } from '@/components/Loader/context'
 import Link from '@/components/Link'
+import { Menu, XIcon } from 'lucide-react'
 import useMounted from '@/hooks/useMounted'
 
 interface MobileMenuProps {
@@ -90,11 +91,8 @@ export default function MobileMenu({ className }: MobileMenuProps) {
   return (
     <>
       <div className={cn(className)}>
-        <button
-          className="relative bg-accent text-accent-text text-label inline-flex items-center justify-center px-2 py-1 font-sans font-medium min-w-11 min-h-11"
-          onClick={open}
-        >
-          MENU
+        <button className="relative" onClick={open}>
+          <Menu />
         </button>
       </div>
 
@@ -106,11 +104,8 @@ export default function MobileMenu({ className }: MobileMenuProps) {
             onClick={close}
           >
             <div className="flex justify-end">
-              <button
-                className="bg-accent text-accent-text text-label inline-flex items-center justify-center px-2 py-1 font-sans font-medium min-w-11 min-h-11"
-                onClick={close}
-              >
-                CLOSE
+              <button className="" onClick={close}>
+                <XIcon />
               </button>
             </div>
 
@@ -125,9 +120,9 @@ export default function MobileMenu({ className }: MobileMenuProps) {
               <Link href="/writings" onClick={close}>
                 Writings
               </Link>
-              <Link href="/play" onClick={close}>
+              <span className="text-text-tertiary line-through" aria-disabled="true">
                 Play
-              </Link>
+              </span>
               <Link href="/about" onClick={close}>
                 About
               </Link>
