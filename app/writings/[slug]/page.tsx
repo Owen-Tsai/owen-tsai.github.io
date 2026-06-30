@@ -37,7 +37,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     notFound()
   }
 
-  const { default: MDXContent } = (await import(`@/content/${slug}.mdx`)) as {
+  const { default: MDXContent } = (await import(`@/content/writings/${slug}.mdx`)) as {
     default: ComponentType
   }
 

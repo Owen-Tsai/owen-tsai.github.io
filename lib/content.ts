@@ -8,7 +8,7 @@ import { visit } from 'unist-util-visit'
 import { toString } from 'mdast-util-to-string'
 import GithubSlugger from 'github-slugger'
 
-const contentDir = path.join(process.cwd(), 'content')
+const contentDir = path.join(process.cwd(), 'content/writings')
 
 export function getAllSlugs() {
   const files = fs.readdirSync(contentDir)
