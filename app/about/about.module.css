@@ -1,0 +1,40 @@
+.image {
+  background: url('@/assets/portrait-slice.png') center no-repeat;
+  background-size: cover;
+  border-radius: 999px;
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20vw;
+  max-width: 280px;
+  min-width: 160px;
+  aspect-ratio: 3 / 4;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cursorVisible {
+  opacity: 1;
+}
+
+.cursorImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cursorImageActive {
+  opacity: 1;
+}

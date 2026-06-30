@@ -1,0 +1,12 @@
+{
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "oxc.enable.oxfmt": true,
+  "editor.formatOnSave": true,
+  "oxc.path.oxfmt": "node_modules/oxfmt/dist/cli.js",
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[mdx]": {
+    "editor.wordWrap": "on"
+  }
+}

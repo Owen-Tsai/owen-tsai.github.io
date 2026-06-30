@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/typography';
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-neutral-900);
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-clash: var(--font-clash);
+
+  /* Backgrounds */
+  --color-bg-primary: var(--color-neutral-900);
+  --color-bg-secondary: var(--color-neutral-800);
+  --color-bg-tertiary: var(--color-neutral-800) / 0.5;
+
+  /* Text */
+  --color-text-primary: var(--color-gray-50);
+  --color-text-secondary: var(--color-gray-400);
+  --color-text-tertiary: var(--color-gray-500);
+
+  /* Accent (light inversion used sparingly for buttons/CTAs) */
+  --color-accent: var(--color-gray-100);
+  --color-accent-text: var(--color-gray-900);
+
+  /* Borders */
+  --color-border-primary: var(--color-neutral-700);
+  --color-border-secondary: var(--color-neutral-600);
+
+  /* Line heights for display type */
+  --leading-tight-display: 0.8;
+  --leading-tight-heading: 0.9;
+  --leading-tight: 0.96;
+
+  /* Semantic font sizes */
+  --text-display: clamp(4rem, 12vw, 8rem);
+  --text-display--line-height: var(--leading-tight-display);
+  --text-hero: clamp(3.5rem, 11vw, 9rem);
+  --text-hero--line-height: var(--leading-tight-display);
+  --text-heading: clamp(2.25rem, 5vw, 3.75rem);
+  --text-heading--line-height: var(--leading-tight-heading);
+  --text-title: clamp(3rem, 8vw, 5rem);
+  --text-title--line-height: var(--leading-tight-heading);
+  --text-lead: clamp(1.75rem, 4vw, 3rem);
+  --text-lead--line-height: var(--leading-tight);
+  --text-body: 1.125rem;
+  --text-body--line-height: 1.6;
+  --text-caption: 0.875rem;
+  --text-caption--line-height: 1.4;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1;
+}

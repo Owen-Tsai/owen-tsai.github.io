@@ -1,0 +1,12 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "jsxSingleQuote": false,
+  "printWidth": 100,
+  "ignorePatterns": [
+    "*.json",
+    "*.nofmt.*",
+    "*.md",
+    "*.mdx"
+  ]
+}
