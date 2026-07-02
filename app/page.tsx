@@ -6,12 +6,12 @@ import { gsap, SplitText } from '@/lib/gsap'
 import HeroScene from '@/components/HeroScene'
 import HeroTitle from '@/components/HeroTitle'
 import Link from '@/components/Link'
+import CursorLabel from '@/components/CursorLabel'
 import { useLoader } from '@/components/Loader/context'
 import { MoveUpRight } from 'lucide-react'
 
 export default function Home() {
   const pageRef = useRef<HTMLDivElement>(null)
-  const hasAnimated = useRef(false)
   const { isReadyForEnter, signalReady } = useLoader()
 
   const handleSceneReady = useCallback(() => {
@@ -77,11 +77,16 @@ export default function Home() {
           </p>
         </div>
         <div className="col-span-6 md:col-span-3 lg:col-span-4 flex items-start justify-end">
-          <Link href="/about">
-            <div className="text-label bg-accent text-accent-text px-2 py-1 inline-flex items-center gap-1">
-              我正在寻找工作机会
-              <MoveUpRight size={14} />
-            </div>
+          <Link href="mailto:owentsai.v@gmail.com">
+            <CursorLabel label="email me">
+              <div
+                data-cursor-item
+                className="text-label bg-accent text-accent-text px-2 py-1 inline-flex items-center gap-1"
+              >
+                我正在寻找工作机会
+                <MoveUpRight size={14} />
+              </div>
+            </CursorLabel>
           </Link>
         </div>
       </div>

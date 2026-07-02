@@ -28,23 +28,27 @@ export default function Navbar({ className }: CommonProps) {
   useGSAP(
     () => {
       if (!isReadyForEnter || hasAnimated.current) return
-      gsap.set('.link', { opacity: 0 })
+      gsap.set('.link, .disabled-link', { opacity: 0 })
       hasAnimated.current = true
 
       // enter animation
-      const tween = gsap.fromTo(
-        '.link',
-        { opacity: 0 },
-        {
-          opacity: 1,
-          stagger: 0.08,
-          ease: 'none',
-        },
-      )
+      const tween1 = gsap.to('.link', {
+        opacity: 1,
+        stagger: 0.08,
+        ease: 'none',
+      })
+      const tween2 = gsap.to('.disabled-link', {
+        opacity: 0.4,
+        delay: 0.16,
+        stagger: 0.08,
+        ease: 'none',
+      })
 
       return () => {
-        tween.kill()
-        tween.revert()
+        tween1.kill()
+        tween1.revert()
+        tween2.kill()
+        tween2.revert()
       }
     },
     {
@@ -84,7 +88,7 @@ export default function Navbar({ className }: CommonProps) {
         <CursorLabel label="coming soon">
           <span
             data-cursor-item
-            className="nav-link opacity-40 line-through cursor-default"
+            className="nav-link disabled-link opacity-0 line-through cursor-default"
             aria-disabled="true"
           >
             &nbsp;Play&nbsp;
